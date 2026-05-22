@@ -1,0 +1,36 @@
+CREATE TABLE login (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ username VARCHAR (50),
+ pass VARCHAR (50)
+);
+
+
+CREATE TABLE ecoregister (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ fullname VARCHAR (50),
+ email VARCHAR (50),
+ username VARCHAR (50),
+ pass VARCHAR (50)
+);
+
+
+CREATE TABLE IF NOT EXISTS community (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    product_name VARCHAR(100),
+    description TEXT,
+    image_path VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES login(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT,
+    user_id INT,
+    comment_text TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES community(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES login(id) ON DELETE CASCADE
+);
