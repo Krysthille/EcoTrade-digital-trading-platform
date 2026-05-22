@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecotrade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('#') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            /* img/bg.png */
+        }
+
+        .header {
+            background: linear-gradient(to right, #2E7D32, #1B5E20);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            color: white;
+            position: relative;
+        }
+
+        .header img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            position: absolute;
+            left: 20px;
+        }
+
+        .nav {
+            background: linear-gradient(to right, #3AA240, #388E3C);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #C8FFC8;
+        }
+
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-menu i {
+            font-size: 18px;
+            margin-right: 5px;
+        }
+
+        .user-name {
+            margin-left: 5px;
+            font-size: 16px;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            min-width: 150px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f0f0f0;
+        }
+
+        .dropdown-menu i {
+            margin-right: 10px;
+        }
+
+        .user-menu:hover .dropdown-menu {
+            display: block;
+        }
+
+        button {
+            color: white !important;
+            background-color: rgba(255, 255, 255, 0.3) !important;
+            border: none !important;
+            border-radius: 5px;
+        }
+
+        .category-container {
+            display: none;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .category-box {
+            width: 200px;
+            height: 150px;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 3px black;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .category-box::after {
+            /* content: ''; */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 25% 100%);
+        }
+
+        .category-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .category-box:nth-child(1) {
+            background-image: url('Products.jpg');
+        }
+
+        .category-box:nth-child(2) {
+            background-image: url('Tools.jpg');
+        }
+
+        .category-box:nth-child(3) {
+            background-image: url('Services.jpg');
+        }
+
+        .content-section {
+            display: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #3AA240;
+                padding: 0;
+                margin: 0;
+                z-index: 1000;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        .extra-content {
+            margin-top: 20px;
+            padding: 20px;
+            background: #1b5e1f7b;
+            border-radius: 10px;
+            color: black;
+            font-size: 18px;
+            text-align: justify;
+        }
+
+        .extra-content h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div style="display: flex; align-items: center;">
+            <img src="img/logo1.png" alt="Logo">
+            <h1>Ecotrade</h1>
+        </div>
+        <div class="user-menu">
+            <i class="fas fa-user"></i>
+            <span class="user-name" id="userName">User</span>
+            <div class="dropdown-menu">
+                <a href="#"><i class="fas fa-user-circle"></i> My Profile</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+    <div id="dropdown" style="position:right;">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> User
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#"> <i class="fas fa-user-circle"></i>My Profile</a></li>
+            <li><a class="dropdown-item" href="#"> <i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            <li> <a href="/login"><i class="fas fa-user-circle"></i>Log in</a></li>
+            <li> <a href="/register"><i class="fas fa-sign-out-alt"></i>Register</a></li>-->
+    </ul>
+    </div>
+
+    </div>
+    <div class="nav">
+        <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+        <div class="nav-links">
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('shop')">Shop</a>
+            <a href="#" onclick="showSection('community')">Community</a>
+            <a href="#" onclick="showSection('about')">About</a>
+            <a href="#" onclick="showSection('contacts')">Contacts</a>
+        </div>
+    </div>
+    <div id="home" class="category-container">
+        <div class="category-box">Products<button>View More →</button></div>
+        <div class="category-box">Tools & Appliances<button>View More →</button></div>
+        <div class="category-box">Services<button style="color:black;">View More →</button></div>
+    </div>
+    <div id="home-extra-content" class="extra-content">
+        <h2>Trade Green, Live Clean.</h2>
+        <p>Ecotrade is more than just a marketplace—it's a movement towards a greener and more sustainable way of
+            trading. Our innovative platform enables users to engage in barter, cash, and cashless transactions across
+            various categories, including Products, Goods & Equipment, and Services. As the world shifts towards more
+            responsible consumption, Ecotrade provides a secure, user-friendly, and community-driven space where people
+            can effortlessly exchange, buy, or sell items and services.</p>
+        <p>We believe in promoting sustainability by reducing waste and encouraging ethical trading practices. Whether
+            you're swapping pre-owned goods, purchasing eco-friendly products, or offering professional services,
+            Ecotrade connects you with a network of like-minded individuals who share a commitment to a greener future.
+            Every transaction made on our platform contributes to a more sustainable world by extending the lifecycle of
+            products and reducing unnecessary waste.</p>
+        <p>By fostering a circular economy, Ecotrade does more than just facilitate trade—it strengthens local economies
+            and nurtures a thriving community of eco-conscious traders. Our goal is to provide a seamless and
+            sustainable way for people to do business while minimizing environmental impact. Through smart trading and
+            ethical exchanges, we empower individuals to make meaningful contributions toward a cleaner and more
+            resource-efficient world.</p>
+        <h2>About Us</h2>
+        <p>At Ecotrade, we are redefining trade by making it more sustainable, efficient, and community-driven. Our
+            platform allows individuals and businesses to buy, sell, or exchange goods and services through barter,
+            cash, and cashless transactions. By integrating modern trading solutions with eco-conscious values, we aim
+            to create a more resource-efficient economy where waste is minimized and value is maximized.</p>
+        <p>In an era where environmental sustainability and economic resilience go hand in hand, Ecotrade offers a
+            practical solution that benefits both people and the planet. Whether you want to repurpose pre-owned
+            products, acquire essential equipment, or offer professional services, our platform provides a secure and
+            responsible trading environment that makes sustainability accessible to all.</p>
+        <p>Beyond just saving money and resources, Ecotrade encourages responsible consumption and fair trade practices.
+            We believe in the power of ethical exchanges and a circular economy where goods and services continuously
+            find value rather than becoming waste. By choosing Ecotrade, you're not just trading—you’re making a
+            statement, supporting sustainability, and actively shaping a better future for generations to come.</p>
+    </div>
+    <div id="shop" class="content-section">Shop Page Content</div>
+    <div id="community" class="content-section">Community Page Content</div>
+    <div id="about" class="content-section">About Page Content</div>
+    <div id="contacts" class="content-section">Contacts Page Content</div>
+
+    <script>
+        function logout() {
+            alert("Logging out...");
+        }
+        function showSection(section) {
+            document.querySelectorAll('.category-container, .content-section').forEach(el => el.style.display = 'none');
+            document.getElementById(section).style.display = 'flex';
+            if (section === 'home') {
+                document.getElementById('home-extra-content').style.display = 'block'; // Show the extra content for home
+            }
+            document.querySelector('.nav-links').classList.remove('active');
+        }
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+        window.onload = function () {
+            showSection('home'); // Show home page by default on load
+        };
+    </script>
+
+    <script>
+        async function login(event) {
+            event.preventDefault(); // Prevent form refresh
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('http://localhost:9090/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.status === 302) {
+                // If login is successful, redirect to home.html
+                window.location.href = "home.html";
+            } else {
+                // If login fails, no message is printed (failure handled by server response)
+                alert("❌ Invalid Username or Password.");
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
