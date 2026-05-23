@@ -8,6 +8,11 @@ This project aims:
 2. To assess the impact of the platform on improving local trade efficiency and accessibility.
 3. To analyze how digital platforms promote sustainable trade and trust among users.
 
+## Screenshots
+
+### Home Page
+![Home Page](ecotrade-home.jpg)
+
 ## Key Features
 - User-Friendly Marketplace interface
 - Hybrid Trade System (Barter, Cash, Cashless)
